@@ -31,6 +31,13 @@ ListView {
     border-color: #ffffff;
 }
 
+.error{
+
+    color: red;
+    border: red;
+    
+}
+
 .successful-step {
     background-color: green;
     color: white;

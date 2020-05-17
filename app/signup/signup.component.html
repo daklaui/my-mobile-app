@@ -40,21 +40,24 @@
             <PreviousNextView *ngSwitchCase="1" >
                 <GridLayout rows="auto, auto, auto,auto">
                     <StackLayout row="0" class="input-field">
-                        <TextField class="input" hint="Email"
+                        <TextField id="email" class="input" hint="Email"
                             keyboardType="email" autocorrect="false"
                             autocapitalizationType="none" [(ngModel)]="user.email"
                         ></TextField>
+                        <Label id="emailreq" *ngIf="isrequired"  text="Required Textfield" class="h6" style="color: red;"></Label>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
     
                     <StackLayout row="1" class="input-field">
-                        <TextField #password class="input"
+                        <TextField id="password" class="input"
                             hint="Password" secure="true"></TextField>
+                            <Label id="emailreq" *ngIf="isrequired"  text="Required Textfield" class="h6" style="color: red;"></Label>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
                     <StackLayout row="2" class="input-field">
-                        <TextField #password class="input"
+                        <TextField id="confirmepassword" class="input"
                             hint="Confirme password" secure="true" [(ngModel)]="user.password"></TextField>
+                            <Label id="emailreq" *ngIf="isrequired"  text="Required Textfield" class="h6" style="color: red;"></Label>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
                     
@@ -124,9 +127,9 @@
     </GridLayout>
 
     <GridLayout row="3" col="0" columns="*,*" colSpan="2" class="bottom-content">
-        <Button row="0" col="0" text="Previous" (tap)="animateBackward()"
+        <Button  row="0" col="0" text="Previous" (tap)="animateBackward()"
             class="btn-previous" id="btnPrevious"></Button>
-        <Button row="0" col="1" text="Next" (tap)="animateGoForward()" class="btn-next"
+        <Button  row="0" col="1" text="Next" (tap)="animateGoForward()" class="btn-next"
             id="btnNext"></Button>
     </GridLayout>
 

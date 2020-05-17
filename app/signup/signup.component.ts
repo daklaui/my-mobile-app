@@ -8,6 +8,8 @@ import { GridLayout } from "tns-core-modules/ui/layouts/grid-layout";
 import { Visibility } from "tns-core-modules/ui/enums";
 import { isAndroid } from "tns-core-modules/platform";
 import { Color } from "tns-core-modules/color";
+import { TextField } from "tns-core-modules/ui/text-field";
+import { alert } from "tns-core-modules/ui/dialogs/dialogs";
 const DEFAULT_STEP = 'item-stepper';
 const CURRENT_STEP = 'item-stepper current-step';
 const SUCCESSFUL_STEP = 'item-stepper successful-step';
@@ -24,6 +26,7 @@ enum MoveTo {
 })
 
 export class SignupComponent implements OnInit {
+  isrequired=false;
   public selectedDate: Date;
   public isOnOpenDepartureDate: boolean = false;
   public departureDate = new Date();
@@ -77,16 +80,34 @@ export class SignupComponent implements OnInit {
     }, 3200)
 }
   animateGoForward() {
-    this.disableButtons();
-    this.previousMovesTo = this.moveTo;
-    this.moveTo = MoveTo.Right;
+
+  
 
     switch (this.currentStep) {
         case 1: {
-            this.itemImageStepper1GoForward();
+          let email = <TextField>this.page.getViewById('email');
+          let password = <TextField>this.page.getViewById('password');
+          let confirmePassword = <TextField>this.page.getViewById('confirmepassword');
+      if(email.text=="" || password.text=="" ||confirmePassword.text=="" || confirmePassword.text!=password.text)
+      {
+      this.isrequired=true;
+    alert("merci de remplir les champs ");
+
+      }
+       else 
+       {
+        this.disableButtons();
+        this.previousMovesTo = this.moveTo;
+        this.moveTo = MoveTo.Right;
+        this.itemImageStepper1GoForward();
+      }    
+
+
+          
             break;
         }
         case 2: {
+ 
             if (this.previousMovesTo === MoveTo.Left) {
                 this.itemImageStepper2GoForwardPreviousStepLeft();
             } else {
