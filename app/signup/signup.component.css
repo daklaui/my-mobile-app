@@ -37,7 +37,13 @@ ListView {
     border: red;
     
 }
+.login-input-field {
+    margin-left: 50px;
 
+  }
+  .login-password-field {
+    padding-left: 10;
+  }
 .successful-step {
     background-color: green;
     color: white;
@@ -122,4 +128,10 @@ ListView {
     text-align: center;
     color: #024184;
     font-weight: 500;
+}
+.ImageCss{
+    width: 768px;
+    height: 768px;
+    margin-top: 5;
+    margin-bottom: 5;
 }
