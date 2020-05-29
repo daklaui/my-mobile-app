@@ -17,6 +17,7 @@ const FilePicker   =require("nativescript-plugin-filepicker");
 const imagepicker = require("nativescript-imagepicker");
 
 import * as app from 'tns-core-modules/application';
+import { NativeScriptDateTimePickerModule } from "nativescript-datetimepicker/angular";
 
 const permissions = require('nativescript-permissions');
 const DEFAULT_STEP = 'item-stepper';
@@ -184,6 +185,65 @@ getPicture(){
 
 }
 
+
+  Validation():boolean
+ {
+   
+     
+    switch (this.currentStep) {
+        case 1: {
+            let email = <TextField>this.page.getViewById('email');
+            let password = <TextField>this.page.getViewById('password');
+            let confirmePassword = <TextField>this.page.getViewById('confirmepassword');
+
+            if(email.text=="" || password.text=="" ||confirmePassword.text=="" || confirmePassword.text!=password.text)
+            {
+            this.isrequired=true;
+            return false;
+            }
+            else
+            {
+                this.isrequired=false;
+                return true; 
+            }
+ 
+            break;
+        }
+        case 2: {
+
+            let Nom = <TextField>this.page.getViewById('Nom');
+            let Prenom = <TextField>this.page.getViewById('Prenom');
+            let SelectDate = <TextField>this.page.getViewById('SelectDate');
+            let Cin = <TextField>this.page.getViewById('Cin');
+            let Telephone = <TextField>this.page.getViewById('Telephone');
+            alert(SelectDate.text);
+            if(Nom.text=="" || Prenom.text=="" ||SelectDate.text=="" || Cin.text==""||Telephone.text=="")
+            {
+            this.isrequired=true;
+            return false;
+            }
+            else
+            {
+                this.isrequired=false;
+                return true; 
+            }
+ 
+            break;
+
+        }
+        case 3: {
+            
+        }
+    }
+
+
+ 
+
+
+ }
+
+
+
   ngAfterViewInit(): void {
     setTimeout(() => {
         let target = this._itemImageStepper1;
@@ -201,19 +261,16 @@ getPicture(){
     let email = <TextField>this.page.getViewById('email');
     let password = <TextField>this.page.getViewById('password');
     let confirmePassword = <TextField>this.page.getViewById('confirmepassword');
-
-
+    let Nom = <TextField>this.page.getViewById('Nom');
+    let Prenom = <TextField>this.page.getViewById('Prenom');
+    let SelectDate = <TextField>this.page.getViewById('SelectDate');
+    let Cin = <TextField>this.page.getViewById('Cin');
+    let Telephone = <TextField>this.page.getViewById('Telephone');
+    let Adresse = <TextField>this.page.getViewById('Adresse');
     switch (this.currentStep) {
         case 1: {
- 
-      if(email.text=="" || password.text=="" ||confirmePassword.text=="" || confirmePassword.text!=password.text)
+      if(this.Validation())
       {
-      this.isrequired=true;
-    alert("merci de remplir les champs ");
-
-      }
-       else 
-       {
         appSettings.setString("email", email.text);
         appSettings.setString("password", password.text);
         appSettings.setString("confirmePassword", confirmePassword.text);
@@ -223,22 +280,30 @@ getPicture(){
         this.moveTo = MoveTo.Right;
         this.itemImageStepper1GoForward(); 
       }    
-
-
-          
             break;
         }
         case 2: {
- 
-            if (this.previousMovesTo === MoveTo.Left) {
-                this.itemImageStepper2GoForwardPreviousStepLeft();
-            } else {
-                this.itemImageStepper2GoForward();
+            if(this.Validation())
+            {
+                appSettings.setString("Nom", Nom.text);
+                appSettings.setString("Prenom", Prenom.text);
+                appSettings.setString("SelectDate", SelectDate.text);
+                appSettings.setString("Cin", Cin.text);
+                appSettings.setString("Telephone", Telephone.text);
+
+                if (this.previousMovesTo === MoveTo.Left) {
+                    this.itemImageStepper2GoForwardPreviousStepLeft();
+                } else {
+                    this.itemImageStepper2GoForward();
+                }
+
             }
+           
             break;
         }
         default: {
             this.enableButtons();
+         
             break;
         }
     }
@@ -258,38 +323,60 @@ GetDataPage1()
   
 }
 
+GetDataPage2()
+{
+    if(appSettings.getString("Nom")!=undefined &&  appSettings.getString("Prenom")!=undefined && appSettings.getString("SelectDate")!=undefined&& appSettings.getString("Cin")!=undefined&& appSettings.getString("Telephone")!=undefined)
+    {
+        let Nom = <TextField>this.page.getViewById('Nom');
+        let Prenom = <TextField>this.page.getViewById('Prenom');
+        let SelectDate = <TextField>this.page.getViewById('SelectDate');
+        let Cin = <TextField>this.page.getViewById('Cin');
+        let Telephone = <TextField>this.page.getViewById('Telephone');
+    
+        Nom.text=appSettings.getString("Nom");
+        Prenom.text=appSettings.getString("Prenom");
+        SelectDate.text=appSettings.getString("SelectDate");
+        Cin.text=appSettings.getString("Cin");
+        Telephone.text=appSettings.getString("Telephone");
+    }
+  
+}
+
+
+GetDataPage3()
+{
+    if(appSettings.getString("Adresse")!=undefined )
+    {
+        let Adresse = <TextField>this.page.getViewById('Adresse');
+        Adresse.text=appSettings.getString("Adresse");
+    }
+  
+}
+
 
 animateBackward() {
-  
-
     this.disableButtons();
     this.previousMovesTo = this.moveTo;
     this.moveTo = MoveTo.Left;
+    let Adresse = <TextField>this.page.getViewById('Adresse');
     switch (this.currentStep) {
         case 2: {
-           
             if (this.previousMovesTo === MoveTo.Left && this.moveTo === MoveTo.Left) {
-                alert("test");
                 this.itemImageStepper2BackwardPreviousStepLeft();
             } else {
            
                 this.itemImageStepper2BackwardPreviousStepRight();
              
             }
-     
-          
-    
             break;
         }
         case 3: {
+            appSettings.setString("Adresse", Adresse.text);
             this.itemImageStepper3Backward();
             break;
         }
         default: {
-   
             this.enableButtons();
-          
-         
             break;
         }
     }

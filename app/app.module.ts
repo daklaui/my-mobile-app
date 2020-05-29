@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { DetailleOffreComponent } from './detaille-offre/detaille-offre.component';
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 //import { NativeScriptFormsModule } from 'nativescript-angular/forms';
@@ -19,6 +20,7 @@ import { SignupComponent } from './signup/signup.component';
       HomeComponent,
       LoginComponent,
       SignupComponent,
+      DetailleOffreComponent,
   ],
   imports: [
       NativeScriptModule,

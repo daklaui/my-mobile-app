@@ -1,0 +1,156 @@
+
+
+<ActionBar class="action-bar" style="background-color: tomato;" flat="true">
+    <Label class="action-bar-title" style="color: white;" text="Detaille Job"></Label>
+</ActionBar>
+
+<StackLayout class="main" verticalAlignment="top">
+
+
+
+    <ScrollView class="anim-images" orientation="horizontal">
+        <StackLayout orientation="horizontal" class="">
+            <GridLayout *ngFor="let imageString of item.images" rows="auto"
+                columns="*">
+                <Image class="card-img-thumb" row="0" col="0" [src]="imageString"
+                    stretch="aspectFill"></Image>
+                </GridLayout>
+        </StackLayout>
+    </ScrollView>
+
+    <GridLayout rows="auto,auto,auto,auto" columns="auto,*" class="content">
+
+        <StackLayout class="line anim-likes" row="2" width="100%" marginTop="10"></StackLayout>
+        <GridLayout  class="anim-itemInfo" marginTop="15" row="1"
+        width="100%" columns="0,*" rows="auto,auto,auto,auto"
+        verticalAlignment="center">
+        <Label text="Titre Offre " row="0" col="0" rowSpan="2"
+           class="fa category-icon"></Label>
+        <Label row="0" col="1" class="item-name" textwrap="true"
+            verticalAlignment="bottom" horizontalAlignment="left" text="itemname"></Label>
+
+        <Label row="1" col="1" class="item-category" textwrap="true"
+            verticalAlignment="top" horizontalAlignment="left" text="itemcategory"></Label>
+        <Label row="2" col="1" class="item-category" text="'Average Rate:' + item.rating "></Label>
+  
+        <StackLayout row="3" col="1">
+            <button  style="background-color: tomato; color: white;border-radius: 20px" class="pull-right" width="50%" text="Postuler"></button>
+          </StackLayout> 
+      
+        
+    </GridLayout>
+  
+
+    <StackLayout width="100%" class="lineBreak anim-likes">
+
+        
+    </StackLayout>
+</GridLayout>
+<ScrollView width="100%" height="100%">
+    <Gridlayout rows="auto,auto,auto,auto,auto,auto,auto,auto,auto" class="content anim-content" marginTop="15">
+
+  
+        <!--Postes--> 
+        <StackLayout row="0">
+           
+                <StackLayout verticalAlignment="top" horizontalAlignment="left"
+                    >
+                    <GridLayout rows="auto, auto, auto, auto, auto, auto" columns="*,*">
+                        <Label row="0" col="0" text="Postes vacants" class="line1" style="font-weight: bold; font-size: 14;"></Label>
+                        <Label row="0" col="1" text="2 postes ouverts" class="line1"></Label>
+                        <Label row="1" col="0" text="Type d'emploi désiré" class="line2" style="font-weight: bold; font-size: 14;" ></Label>
+                        <Label row="1" col="1" text="CDI" class="line2"></Label>
+                        <Label row="2" col="0" text="Experience" class="line3" style="font-weight: bold; font-size: 14;"></Label>
+                        <Label row="2" col="1" text="1 a 3 ans" class="line3"></Label>
+                        <Label row="3" col="0" text="Langue" class="line4" style="font-weight: bold; font-size: 14;"></Label>
+                        <Label row="3" col="1" text="Francais" class="line4"></Label>
+                    </GridLayout>
+                </StackLayout>
+      
+        </StackLayout>
+       
+        <GridLayout row="1" rows="auto" marginBottom="5" columns="auto, auto">
+           
+            <Label col="0" class="description-text" text="Description de l'emploi"
+                textWrap="true"></Label>
+        </GridLayout>
+
+        <StackLayout row="2">
+       
+                <StackLayout verticalAlignment="top" horizontalAlignment="left"
+                    >
+                    <Textview editable="false" class="description-value"
+                        textWrap="true" text="orem ipsum, dolor sit amet consectetur adipisicing elit. Ratione maiores, veritatis nesciunt sint dolorum sequi dicta omnis dolor blanditiis, ipsam officiis commodi temporibus quas non nobis tempore saepe necessitatibus quasi! Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                        Ratione maiores, veritatis nesciunt sint dolorum sequi dicta omnis dolor blanditiis, ipsam officiis commodi temporibus quas non nobis tempore saepe necessitatibus quasi! Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                        Nesciunt sint dolorum sequi dicta omnis dolor blanditiis, ipsam officiis commodi temporibus quas non nobis tempore saepe necessitatibus quasi!
+                        Ratione maiores, veritatis nesciunt sint dolorum sequi dicta omnis dolor blanditiis, ipsam officiis commodi temporibus quas non nobis tempore saepe necessitatibus quasi! Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                        Nesciunt sint dolorum sequi dicta omnis dolor blanditiis, ipsam officiis commodi temporibus quas non nobis tempore saepe necessitatibus quasi!">
+                    </Textview>
+                </StackLayout>
+     
+        </StackLayout>
+        <GridLayout row="3" rows="auto" marginBottom="5" columns="auto, auto">
+          
+            <Label col="0" class="description-text" text="Exigences de l'emploi"
+                textWrap="true"></Label>
+        </GridLayout>
+
+        <StackLayout row="4">
+       
+                <StackLayout verticalAlignment="top" horizontalAlignment="left"
+                    >
+                    <Textview editable="false" class="description-value"
+                        textWrap="true" text="orem ipsum, dolor sit amet consectetur adipisicing elit. Ratione maiores, veritatis nesciunt sint dolorum sequi dicta omnis dolor blanditiis, ipsam officiis commodi temporibus quas non nobis tempore saepe necessitatibus quasi! Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                        Ratione maiores, veritatis nesciunt sint dolorum sequi dicta omnis dolor blanditiis, ipsam officiis commodi temporibus quas non nobis tempore saepe necessitatibus quasi! Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                        Nesciunt sint dolorum sequi dicta omnis dolor blanditiis, ipsam officiis commodi temporibus quas non nobis tempore saepe necessitatibus quasi!
+                        Ratione maiores, veritatis nesciunt sint dolorum sequi dicta omnis dolor blanditiis, ipsam officiis commodi temporibus quas non nobis tempore saepe necessitatibus quasi! Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                        Nesciunt sint dolorum sequi dicta omnis dolor blanditiis, ipsam officiis commodi temporibus quas non nobis tempore saepe necessitatibus quasi!">
+                    </Textview>
+                </StackLayout>
+     
+        </StackLayout>
+
+        <GridLayout row="5" rows="auto" marginBottom="5" columns="auto, auto">
+          
+            <Label col="0" class="description-text" text="Profil recherché"
+                textWrap="true"></Label>
+        </GridLayout>
+
+        <StackLayout row="6">
+       
+                <StackLayout verticalAlignment="top" horizontalAlignment="left"
+                    >
+                    <Textview editable="false" class="description-value"
+                        textWrap="true" text="orem ipsum, dolor sit amet consectetur adipisicing elit. Ratione maiores, veritatis nesciunt sint dolorum sequi dicta omnis dolor blanditiis, ipsam officiis commodi temporibus quas non nobis tempore saepe necessitatibus quasi! Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                        Ratione maiores, veritatis nesciunt sint dolorum sequi dicta omnis dolor blanditiis, ipsam officiis commodi temporibus quas non nobis tempore saepe necessitatibus quasi! Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                        Nesciunt sint dolorum sequi dicta omnis dolor blanditiis, ipsam officiis commodi temporibus quas non nobis tempore saepe necessitatibus quasi!
+                        Ratione maiores, veritatis nesciunt sint dolorum sequi dicta omnis dolor blanditiis, ipsam officiis commodi temporibus quas non nobis tempore saepe necessitatibus quasi! Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                        Nesciunt sint dolorum sequi dicta omnis dolor blanditiis, ipsam officiis commodi temporibus quas non nobis tempore saepe necessitatibus quasi!">
+                    </Textview>
+                </StackLayout>
+     
+        </StackLayout>
+  
+
+        <GridLayout row="7" rows="auto" marginBottom="5" columns="auto, auto">
+            <Label col="0" class="description-text" text="Date d'expiration : "
+                textWrap="true"></Label>
+                <Label  col="1"  class="description-value"
+                textWrap="true" text="05/06/2020">
+            </Label>
+        </GridLayout>
+
+
+        <GridLayout row="8" rows="auto" marginBottom="5" columns="auto,auto,auto">
+            <Label col="0" class="description-text" text="Mots clés : "
+                textWrap="true"></Label>
+                <Label col="1"  class="description-value"
+                textWrap="true" text="omots">
+            </Label>
+        </GridLayout>
+
+        
+
+    </Gridlayout>
+</ScrollView>
+</StackLayout>
