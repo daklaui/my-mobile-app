@@ -13,7 +13,7 @@ import { TextField } from "tns-core-modules/ui/text-field";
 import { alert } from "tns-core-modules/ui/dialogs/dialogs";
 import * as imageSourceModule from  "image-source";
 import * as fs from "file-system";
-const FilePicker   =require("nativescript-plugin-filepicker");
+const FilePicker   =require("nativescript-plugin-filepicker"); 
 const imagepicker = require("nativescript-imagepicker");
 
 import * as app from 'tns-core-modules/application';
