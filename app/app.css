@@ -34,9 +34,10 @@
   horizontal-align: center;
   font-size: 25;
   font-weight: 600;
-  margin-bottom: 70;
+  margin-bottom: 10;
   text-align: center;
   color: #D51A1A;
+  background-color: #D51A1A;
 }
 
 .input-field {
@@ -65,4 +66,89 @@
 }
 .bold {
   color: #000000; 
+}
+
+#globeItemNavigation {
+  z-index: 1;
+}
+
+#itemNavigationButton3 {
+  z-index: 0;
+}
+.header {
+  background: #eb800e;
+}
+
+.fa {
+  font-family: FontAwesome, fontawesome-webfont;
+}
+.icon-menu {
+  color: #ffffff;
+  text-align: center;
+  width: 100%;
+  font-size: 24;
+}
+
+.icon-item-menu {
+  color: #000000;
+  text-align: center;
+  width: 100%;
+  font-size: 24;
+}
+.side-drawer {
+  background-color: #ffffff;
+}
+
+.searchField {
+  border-bottom-width: 1;
+  border-bottom-color: #000000;
+  text-decoration: none;
+  placeholder-color: #000000;
+  padding: 6;
+  color: #000000;
+}
+
+.menu {
+  height: 15%;
+}
+
+.item-menu {
+  padding: 8 0;
+}
+
+/* Bottom Navigation */
+
+.icon-footer {
+  font-size: 28;
+  color: #000000;
+}
+
+.icon-footer-active {
+  font-size: 28;
+  color: #1aa3ff;
+}
+
+.footer {
+  border-top-width: 1;
+  border-top-color: #e8e8e8;
+  background-color: #ffffff;
+}
+
+.text-item-menu {
+  padding-bottom: 1;
+  font-size: 18;
+  color: #000000;
+}
+
+.globe {
+  background-color: red;
+  width: 24;
+  height: 24;
+  border-radius: 12;
+  text-align: center;
+  color: #ffffff;
+  font-size: 14;
+  margin-bottom: 10;
+  margin-left: 10;
+  padding-top: 2;
 }

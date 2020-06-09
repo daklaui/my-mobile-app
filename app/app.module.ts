@@ -3,29 +3,32 @@ import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { AppRoutingModule } from './app-routing.module';
 import { NativeScriptDateTimePickerModule } from "nativescript-datetimepicker/angular";
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { DetailleOffreComponent } from './detaille-offre/detaille-offre.component';
-
+import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
 // Uncomment and add to NgModule imports if you need to use two-way binding
-//import { NativeScriptFormsModule } from 'nativescript-angular/forms';
+import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 
 // Uncomment and add to NgModule imports  if you need to use the HTTP wrapper
- //import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
+import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
+
 
 @NgModule({
   declarations: [
       AppComponent,
-      HomeComponent,
       LoginComponent,
       SignupComponent,
       DetailleOffreComponent,
+    
   ],
   imports: [
       NativeScriptModule,
       AppRoutingModule,
       NativeScriptDateTimePickerModule,
+      NativeScriptFormsModule,
+      NativeScriptHttpClientModule,
+      NativeScriptUISideDrawerModule
      
   ],
   bootstrap: [AppComponent],

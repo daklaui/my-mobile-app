@@ -1,0 +1,37 @@
+
+    <StackLayout >
+        <SearchBar hint="Mots clé ou adresse " [text]="searchPhrase"
+        (submit)="onSearchSubmit($event)"></SearchBar>
+
+
+  
+  
+    <ScrollView  class="page">
+        
+        <StackLayout >
+         
+            <CardView *ngFor="let item of this.backend.ListeOfOffres" class="card" elevation="40"
+                radius="10" ios:shadowRadius="3">
+                <StackLayout class="card-layout">
+                    <Label class="h3" [text]="item.TITRE" color="#2bade7">
+                    </Label>
+                    <Label text="♣️" color="#eb800e">
+                    </Label>
+
+                    <Label class="h4" [text]="item.NOM_EMP">
+                    </Label>
+                    <Label text="❤️" color="#eb800e">
+                    </Label>
+                    <Label class=" h4" [text]="item.ADRESSE_EMPLOYEUR"></Label>
+
+                    <Label class="body" textWrap="true" [text]="item.OFFRE_DESC">
+                    </Label>
+                    <Button text="Voir plus" color="#eb800e"
+                        (tap)="onButtonTap(item.ID_OFFRE)" backgroundColor="#fff">
+                    </Button>
+                </StackLayout>
+
+            </CardView>
+        </StackLayout>
+    </ScrollView>
+</StackLayout>

@@ -18,6 +18,10 @@ const imagepicker = require("nativescript-imagepicker");
 
 import * as app from 'tns-core-modules/application';
 import { NativeScriptDateTimePickerModule } from "nativescript-datetimepicker/angular";
+import { User } from "../Model/user.model";
+import { Candidat } from "../Model/candidat.model";
+import { BackendServiceService } from "../backend-service.service";
+import { RouterExtensions } from "nativescript-angular/router";
 
 const permissions = require('nativescript-permissions');
 const DEFAULT_STEP = 'item-stepper';
@@ -39,7 +43,12 @@ const appSettings = require("tns-core-modules/application-settings");
 
 export class SignupComponent implements OnInit {
   isrequired=false;
- 
+  public RequiredLabel=0;
+  isrequiredPassword=false;
+  user:User;
+  candidat:Candidat;
+  MessageError:String="";
+  MessageErrorPassword="";
   public selectedDate: Date;
   public isOnOpenDepartureDate: boolean = false;
   public departureDate = new Date();
@@ -64,9 +73,12 @@ export class SignupComponent implements OnInit {
   private _selectDateGridLayout: GridLayout;
   private _overlayGridLayout: GridLayout;
 
-  constructor(private page: Page) {   var returnDate = new Date(); 
+  constructor(private page: Page,private backend:BackendServiceService, private routerExtensions: RouterExtensions) {   var returnDate = new Date(); 
     returnDate.setDate(returnDate.getDate() + 2);
-    this.returnDate = returnDate;}
+    this.returnDate = returnDate;
+this.user=new User();
+this.candidat=new Candidat();
+}
   
   ngOnInit() {
 
@@ -86,6 +98,7 @@ export class SignupComponent implements OnInit {
 
 public myImage="";
 public linkFile="Selection done";
+public linkFiles="";
   
  /**
      * openCustomFiles
@@ -106,8 +119,9 @@ public linkFile="Selection done";
             let path = fs.path.join(selected);
             const file = fs.File.fromPath(path);
             console.log("Selection done: " + selected);
-           
             this.linkFile="Selection done: " + file.name;
+            this.linkFiles=selected;
+           // this.sendImages(selected) ;
             //alert( this.linkFile);
         });
     }).catch(function (e) {
@@ -140,18 +154,6 @@ getPicture(){
         height:500
     }
      imageAsset.options.keepAspectRatio = true;
-     /* selection.forEach(function(selected_item) {
-          // console.dir(selected_item)
-          selected_item.getImageAsync(function(imagesource){
-              console.log("Image: "+imagesource);
-              let folder = fs.knownFolders.documents();
-              let path = fs.path.join(folder.path, milliseconds+".png");
-             const img = imageSourceModule.fromNativeSource(imagesource);
-            //  console.debug(img);
-              let saved = img.saveToFile(path, "png");
-             this.myImage=path;           
-          })
-      });*/
       imageSourceModule.fromAsset(imageAsset).then(
         savedImage => {
             var newheight = savedImage.height,
@@ -171,6 +173,8 @@ getPicture(){
             savedImage.saveToFile(path, "png");
             var loadedImage = imageSourceModule.fromFile(path);
             this.myImage=path;    
+            
+              
         });
 
 
@@ -184,7 +188,59 @@ getPicture(){
 
 
 }
+/****************************************************************************** */
 
+ extractImageName(fileUri) {
+    var pattern = /[^/]*$/;
+    var imageName = fileUri.match(pattern);
+
+    return imageName;
+}
+
+
+ sendImages(fileUri):Promise<any> {
+
+
+        return new Promise((resolve,reject)=>{
+            let imageName = this.extractImageName(fileUri);
+            var name = fileUri.substr(fileUri.lastIndexOf("/") + 1);
+            var bghttp = require("nativescript-background-http");
+            var session = bghttp.session("file-upload");
+            var request = {
+                //api/FileUploading
+                url: "http://92.222.83.184:9095/api/FileUploading",
+                method: "POST",
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    "File-Name": name
+                },
+                description: "Uploading " + name
+            };
+            var params = [
+                { name: "test", value: "value" },
+                { name: name, filename: fileUri, mimeType: 'image/jpeg' }
+            ];
+            var task = session.multipartUpload(params, request);
+            task.on("progress", logEvent);
+            task.on("error", logEvent);
+            task.on("complete", (data)=>{
+               // console.log("complet");
+                resolve(data);
+            });
+            function logEvent(e) {
+                console.log("currentBytes: " + e.currentBytes);
+                console.log("totalBytes: " + e.totalBytes);
+                console.log("eventName: " + e.eventName);
+            }
+        });
+     
+
+
+    
+   // return task;
+}
+
+/****************************************************************************** */
 
   Validation():boolean
  {
@@ -192,11 +248,50 @@ getPicture(){
      
     switch (this.currentStep) {
         case 1: {
-            let email = <TextField>this.page.getViewById('email');
-            let password = <TextField>this.page.getViewById('password');
-            let confirmePassword = <TextField>this.page.getViewById('confirmepassword');
 
-            if(email.text=="" || password.text=="" ||confirmePassword.text=="" || confirmePassword.text!=password.text)
+            let password = <TextField>this.page.getViewById('password');
+           
+  
+    if(this.user.LOGIN=="")
+   {
+       this.isrequired=true;
+       this.MessageError="Required Textfield *";
+   }
+   else if (!this.user.isValidEmail())
+   {
+    this.isrequired=true;
+    this.MessageError="Enter a valid email address";
+   }
+   else if (password.text=="")
+   {
+    this.isrequired=false;
+       this.isrequiredPassword=true;
+       this.MessageErrorPassword="Required Textfield *";
+   }
+   else if(this.user.PASSWORD!=password.text)
+   {
+    this.isrequired=false;
+    this.isrequiredPassword=true;
+    this.MessageErrorPassword="Password does not match";
+   }
+   else if(!this.user.isValidPassword())
+   {
+    this.isrequired=false;
+    this.isrequiredPassword=true;
+    this.MessageErrorPassword="Password Minimum length 6 , Must have uppercase lowercase letters  digits";
+   }
+   else{
+    this.isrequired=false;
+    this.isrequiredPassword=false;
+       return true;
+   }
+
+             
+
+   break;
+   /*
+
+            if(this=="" || password.text=="" ||confirmePassword.text=="" || confirmePassword.text!=password.text)
             {
             this.isrequired=true;
             return false;
@@ -207,27 +302,79 @@ getPicture(){
                 return true; 
             }
  
-            break;
+           */
         }
         case 2: {
-
             let Nom = <TextField>this.page.getViewById('Nom');
             let Prenom = <TextField>this.page.getViewById('Prenom');
             let SelectDate = <TextField>this.page.getViewById('SelectDate');
             let Cin = <TextField>this.page.getViewById('Cin');
             let Telephone = <TextField>this.page.getViewById('Telephone');
-            alert(SelectDate.text);
-            if(Nom.text=="" || Prenom.text=="" ||SelectDate.text=="" || Cin.text==""||Telephone.text=="")
+            alert(this.candidat.DATE_NAISSENCE+"");
+           /*Verificaton Nom et prenom candidat */
+            if(this.candidat.NOM=="" || this.candidat.NOM==undefined )
             {
-            this.isrequired=true;
-            return false;
+                this.RequiredLabel=1;
+                this.MessageError="Required Textfield *";
             }
-            else
+            else if (this.candidat.NOM.length<4)
             {
-                this.isrequired=false;
-                return true; 
+                this.RequiredLabel=1;
+             this.MessageError="Min length  4 "; 
             }
- 
+
+            else if (this.candidat.PRENOM=="" || this.candidat.PRENOM==undefined)
+            {
+                this.RequiredLabel=2;
+                this.MessageError="Required Textfield *";
+            }
+            else if (this.candidat.PRENOM.length<4)
+            {
+                this.RequiredLabel=2;
+             this.MessageError="Min length  4 ";
+            }
+            /****************END********************/
+
+            /**********************Verification date de naissence***********************/
+            else if (this.candidat.DATE_NAISSENCE.toString()=="" || this.candidat.DATE_NAISSENCE==undefined)
+            {
+                this.RequiredLabel=3;
+             this.MessageError="Required Textfield * ";
+            }
+            /*****************************END************** */
+
+            /**********************Verification CIN***********************/
+            else if (this.candidat.CIN=="" || this.candidat.CIN==undefined)
+            {
+                this.RequiredLabel=4;
+             this.MessageError="Required Textfield * ";
+            }
+           
+            else if (this.candidat.CIN.length!=8)
+            {
+                this.RequiredLabel=4;
+             this.MessageError="Cin failed* ";
+            }
+            /*****************************END************** */
+            /**********************Verification CIN***********************/
+            else if (this.candidat.TELEPHONE=="" || this.candidat.TELEPHONE==undefined)
+            {
+                this.RequiredLabel=5;
+             this.MessageError="Required Textfield * ";
+            }
+           
+            else if (this.candidat.TELEPHONE.length!=8)
+            {
+                this.RequiredLabel=5;
+             this.MessageError="Telephone failed * ";
+            }
+                /*****************************END************** */
+            else{
+                this.RequiredLabel=0;
+                return true;
+            }
+         
+
             break;
 
         }
@@ -269,6 +416,7 @@ getPicture(){
     let Adresse = <TextField>this.page.getViewById('Adresse');
     switch (this.currentStep) {
         case 1: {
+       
       if(this.Validation())
       {
         appSettings.setString("email", email.text);
@@ -302,12 +450,51 @@ getPicture(){
             break;
         }
         default: {
-            this.enableButtons();
-         
-            break;
+         this.enableButtons();
+         console.log(this.user);
+         console.log(this.candidat);
+         console.log(this.myImage);
+           if(this.myImage.length>0)
+           {
+            this.sendImages(this.myImage);
+           }
+           if(this.linkFiles.length>0)
+           {
+            this.sendImages(this.linkFiles);
+           }
+           
+           this.Register(this.user,this.candidat);
+           break;
         }
     }
 }
+
+
+//
+
+Register(user:User,candidat:Candidat) 
+{
+    user.TYPE_COMPTE="Candidat";
+    this.backend.SaveLogin(user);
+  /***********************GET ID_USER************************ */
+    this.backend.Login(user).then((response) => {
+        let ID_user =response.content.toJSON().ID_USER;
+        candidat.ID_USER=ID_user;
+        candidat.EMAIL=response.content.toJSON().LOGIN;
+   /************************INSERT CANDIDAT ********************************* */
+     this.backend.SaveCandidat(candidat).then((response) => {
+        this.routerExtensions.navigate(["/home"], { clearHistory: true });
+ 
+     });
+   /************************************************************************* */
+          }, (e) => {
+            console.log("mosataz"+e);
+          });
+    
+}
+
+
+
 
 GetDataPage1()
 {
@@ -401,6 +588,7 @@ itemImageStepper1GoForward() {
           console.log('Animation Finished!');
       })
       .catch((e) => {
+    
           console.log(e.message);
       });
 }

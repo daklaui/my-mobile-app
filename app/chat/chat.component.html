@@ -1,0 +1,20 @@
+<GridLayout class="animate-fadeInUp-delay-0ms">
+    <ListView [items]="conversations" (itemTap)="onItemTap($event)" class="list-chat">
+        <ng-template let-conversation="item" let-i="index">
+            <GridLayout rows="30, 30" columns="94, *, 74" class="conversation-content">
+                <Image row="0" col="0" rowSpan="2" [src]="conversation.authorImg"
+                    stretch="aspectFill" class="convImg"></Image>
+                <Label row="0" col="1" style.verticalAlignment="center"
+                    [text]="conversation.authorName" class="convFriendName {{conversation.wasSeen ? 'wasSeen': 'noWasSeen'}}"></Label>
+                <Label row="1" col="1" [text]="conversation.lastMessage"
+                    style.verticalAlignment="center" class="convTextOut {{conversation.wasSeen ? 'wasSeen': 'noWasSeen'}}"></Label>
+                <Label row="0" col="2" [text]="conversation.hour"
+                    style.textAlignment="center" style.verticalAlignment="center"
+                    class="{{conversation.wasSeen ? 'wasSeen': 'noWasSeen'}}"></Label>
+                <Label row="1" col="2" style.textAlignment="center"
+                    style.verticalAlignment="center" [text]="conversation.icon"
+                    [color]="conversation.colorIcon" class="fa"></Label>
+            </GridLayout>
+        </ng-template>
+    </ListView>
+</GridLayout>

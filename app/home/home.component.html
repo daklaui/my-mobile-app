@@ -1,6 +1,30 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<StackLayout class="p-20">
-  <Label text="Tap the button" class="h1 text-center"></Label>
-  <Button text="TAP" (tap)="onTap()" class="-primary"></Button>
-  <Label [text]="getMessage()" class="h2 text-center" textWrap="true"></Label>
-</StackLayout>
+<ActionBar title="" class="action-bar header">
+    <GridLayout rows="*" columns="42,*,42" width="100%">
+        <Button row="0" col="0" [text]="drawerTrigger" (tap)="openDrawer()"
+            class="icon-menu fa"></Button>
+    </GridLayout>
+</ActionBar>
+
+<GridLayout class="page" rows="*,48" columns="*">
+    <GridLayout [ngSwitch]="currentStep" row="0" col="0">
+        <app-liste-offres *ngSwitchCase="1"></app-liste-offres>
+        <ns-profile *ngSwitchCase="2"></ns-profile>
+        <ns-chat *ngSwitchCase="3"></ns-chat>
+    </GridLayout>
+
+    <GridLayout rows="*" columns="*,*,*,*" row="1" col="0" class="footer">
+        <Label id="globeItemNavigation" row="0" col="2" text="1" class="globe"
+            (tap)="navigateToStep(3)"></Label>
+        <Button id="itemNavigationButton1" row="0" col="0" [text]="iconNewspaper"
+            (tap)="navigateToStep(1)" class="fa icon-footer-active"></Button>
+        <Button id="itemNavigationButton2" row="0" col="1" [text]="iconProfile"
+            (tap)="navigateToStep(2)" class="fa icon-footer"></Button>
+
+        <Button id="itemNavigationButton3" row="0" col="2" [text]="iconComment"
+            (tap)="navigateToStep(3)" class="fa icon-footer"></Button>
+
+
+        <Button id="itemNavigationButton4" row="0" col="3" [text]="iconBell"
+            (tap)="navigateToStep(4)" class="fa icon-footer"></Button>
+    </GridLayout>
+</GridLayout>

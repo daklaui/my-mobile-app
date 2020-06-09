@@ -1,0 +1,39 @@
+/* Chat */
+.list-chat {
+    padding: 24 0;
+}
+
+.conversation-content {
+    padding: 12 0;
+}
+
+.convImg {
+    width: 60;
+    height: 60;
+    border-radius: 30;
+    /*android delete this padding: 0 12;*/
+}
+
+.convFriendName {
+    font-weight: bold;
+    font-size: 19;
+    padding: 0;
+}
+
+.convDateOut {
+    font-size: 15;
+    text-align: center;
+}
+
+.convTextOut {
+    font-size: 15;
+}
+
+.notWasSeen {
+    color: #000;
+    font-weight: bold;
+}
+
+.wasSeen {
+    color: #6C6C6C;
+}

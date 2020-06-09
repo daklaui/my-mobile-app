@@ -1,0 +1,40 @@
+<StackLayout>
+    <SearchBar hint="Mots clé ou adresse " [text]="searchPhrase"
+    (submit)="onSearchSubmit($event)"></SearchBar>
+<GridLayout class="animate-fadeInUp-delay-0ms">
+
+    <ListView [items]="posts" (itemTap)="onItemTap($event)" class="list-group">
+        <ng-template let-post="item" let-i="index">
+            <StackLayout>
+                <GridLayout rows="auto, auto, auto, auto, auto" columns="64, *"
+                    class="post-content">
+                    <Image row="0" col="0" rowSpan="2" [src]="post.authorImg"
+                        stretch="aspectFill" class="postImageSmall" loadMode="async"></Image>
+
+                    <Label row="0" col="1" class="postAuthorName" [text]="post.authorName"></Label>
+
+                    <Label row="1" col="1" class="postDateSmall" [text]="post.date"></Label>
+
+                    <Label class="postTitle" row="2" col="0" colSpan="2"
+                        [text]="post.title"></Label>
+                    <Image row="3" col="0" colSpan="2" [src]="post.postImg"
+                        stretch="aspectFill"></Image>
+
+                    <GridLayout row="4" col="0" colSpan="2" rows="*" columns="*,*,*">
+                        <Label row="0" col="0" [text]="iconHeart" class="icon-hart fa"
+                            verticalAlignment="center"></Label>
+                        <Label row="0" col="0" [text]="post.likes" class="text-icon-hart"></Label>
+
+                        <Label row="0" col="1" [text]="iconComments" class="icon-post fa"></Label>
+                        <Label row="0" col="1" [text]="post.comments" class="text-icon-post"></Label>
+
+                        <Label row="0" col="2" [text]="iconRetweet" class="icon-star fa"></Label>
+                        <Label row="0" col="2" [text]="post.repost" class="text-icon-star"></Label>
+                    </GridLayout>
+
+                </GridLayout>
+            </StackLayout>
+        </ng-template>
+    </ListView>
+</GridLayout>
+</StackLayout>
