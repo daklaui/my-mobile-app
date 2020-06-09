@@ -65,7 +65,7 @@ export class SignupComponent implements OnInit {
   private _itemStepper1: Label;
   private _itemStepper2: Label;
   private _itemStepper3: Label;
-  private _itemImageStepper1: View;
+  private _itemImageStepper1: View; 
   private _itemImageStepper2: View;
   private _itemImageStepper3: View;
   private moveTo: MoveTo = MoveTo.Right;
