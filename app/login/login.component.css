@@ -2,7 +2,10 @@ Scrollview{
     background-color: #ee8133;
 }
 
+Image {
+    height: 45%;
 
+}
 
 TextField {
     color : white;

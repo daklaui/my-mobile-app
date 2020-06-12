@@ -16,12 +16,14 @@ export class LoginComponent implements OnInit {
   isrequired:Boolean=false;
   MessageError:String="";
   userResult:User;
-constructor(private backend:BackendServiceService, private routerExtensions: RouterExtensions){
+constructor(private backend:BackendServiceService, private routerExtensions: RouterExtensions,private page: Page){
   this.user = new User();
+  this.page.actionBarHidden = true;
 }
 
   ngOnInit(): void {
     throw new Error("Method not implemented.");
+    
   }
 	submit() {
 		if (!this.user.isValidEmail()) {
