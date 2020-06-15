@@ -26,7 +26,7 @@ ListView {
 }
 
 .current-step {
-    background-color: red;
+    background-color: #ee6233;
     color: #ffffff;
     border-color: #ffffff;
 }
@@ -39,6 +39,7 @@ ListView {
 }
 .login-input-field {
     margin-left: 50px;
+    color:black;
 
   }
   .login-password-field {
@@ -51,9 +52,9 @@ ListView {
 }
 
 .line-stepper {
-    background-color: red;
+    background-color: #ee6233;
     border-width: 1;
-    border-color: red;
+    border-color: #ee6233;
 }
 
 .item-image--stepper {
@@ -66,7 +67,7 @@ ListView {
 }
 
 .home {
-    background-color: white;
+    background-color: #ee8133;
 }
 
 .cloud {
@@ -79,22 +80,22 @@ ListView {
 }
 
 .btn-next {
-    background-color: red;
+    background-color: #ee6233;
     color: #ffffff;
     padding: 10 15;
     font-weight: bold;
 }
 
 .btn-previous {
-    background-color: #ffffff;
-    color: red;
+    background-color: #ee6233;
+    color: white;
     padding: 10 15;
-    border: red;
+    border: white;
     font-weight: bold;
 }
 
 .btn-previous:disabled {
-    background-color: #cccccc;
+    background-color: black;
 }
 
 .btn-next:disabled {
@@ -102,7 +103,7 @@ ListView {
 }
 
 .bottom-content {
-    background-color: #ffffff;
+    background-color: #ee8133;
 }
 
 .arrow-next {

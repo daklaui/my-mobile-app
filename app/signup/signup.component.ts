@@ -81,7 +81,7 @@ this.candidat=new Candidat();
 }
   
   ngOnInit() {
-
+    this.page.actionBarHidden = true;
     this._btnPrevious = this.page.getViewById('btnPrevious');
     this._btnNext = this.page.getViewById('btnNext');
     this._itemImageStepper1 = this.page.getViewById('itemImageStepper1');

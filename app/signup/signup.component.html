@@ -44,7 +44,7 @@
                 {{GetDataPage1()}}
                 <GridLayout rows="auto, auto, auto,auto"  >
                     <StackLayout row="0" class="input-field">
-                        <TextField row="0" id="email"   class="input" hint="Email"
+                        <TextField row="0" id="email"   class="input" hint="Adresse Email"
                         keyboardType="email"   autocorrect="false" [(ngModel)]="user.LOGIN"
                         autocapitalizationType="none"></TextField>
                     <Label id="emailreq" row="1" *ngIf="isrequired"  [text]="MessageError" class="login-input-field "  style="color: red;"></Label>
@@ -52,15 +52,15 @@
                     </StackLayout> 
     
                     <StackLayout row="1" class="input-field">
-                        <TextField id="password" class="input"
-                            hint="Password" secure="true" ></TextField>
+                        <TextField id="password" class="input" style="margin-top: 30px;"
+                            hint="Mot de passe" secure="true" ></TextField>
                             <Label id="passwordreq" *ngIf="isrequiredPassword"  [text]="MessageErrorPassword" class="login-input-field "  style="color: red;"></Label>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
 
                     <StackLayout row="2" class="input-field">
-                        <TextField id="confirmepassword" class="input"
-                            hint="Confirme password" secure="true" [(ngModel)]="user.PASSWORD" ></TextField>
+                        <TextField id="confirmepassword" class="input" style="margin-top: 30px;"
+                            hint="Confirmer le mot de passe " secure="true" [(ngModel)]="user.PASSWORD" ></TextField>
                             <Label id="emailreq" *ngIf="isrequiredPassword"  [text]="MessageErrorPassword" class="login-input-field "  style="color: red;"></Label>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
@@ -78,24 +78,24 @@
                     </StackLayout>
     
                     <StackLayout row="1" class="input-field">
-                        <TextField  class="input" id="Prenom" [(ngModel)]="candidat.PRENOM" hint="Prenom" ></TextField>
+                        <TextField  class="input" id="Prenom" [(ngModel)]="candidat.PRENOM" hint="Prénom" style="margin-top:5px;"></TextField>
                             <Label *ngIf="RequiredLabel==2"  [text]="MessageError" class="login-input-field "  style="color: red;"></Label>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
                     <StackLayout row="2" class="input-field">
-                        <datetime:DatePickerField hint="select date" id="SelectDate" [(ngModel)]="candidat.DATE_NAISSENCE"  class="input"   dateFormat="dd/MM/yyyy"/>
+                        <datetime:DatePickerField hint="Date de naissance" id="SelectDate" [(ngModel)]="candidat.DATE_NAISSENCE"  class="input" style="margin-top:px;"  dateFormat="dd/MM/yyyy"/>
                         <Label  *ngIf="RequiredLabel==3"  [text]="MessageError"  class="login-input-field "  style="color: red;"></Label>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
                     <StackLayout row="3" class="input-field">
-                        <TextField  class="input" id="Cin" [(ngModel)]="candidat.CIN"
+                        <TextField  class="input" id="Cin" [(ngModel)]="candidat.CIN" style="margin-top:5px;"
                             hint="Cin" ></TextField>
                             <Label  *ngIf="RequiredLabel==4"  [text]="MessageError" class="login-input-field "  style="color: red;"></Label>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
                     <StackLayout row="4" class="input-field">
                         <TextField  class="input"
-                            hint="Telephone" id="Telephone"  [(ngModel)]="candidat.TELEPHONE"></TextField>
+                            hint="Telephone" id="Num de Téléphone"  [(ngModel)]="candidat.TELEPHONE" style="margin-top:1px;"></TextField>
                             <Label *ngIf="RequiredLabel==5"  [text]="MessageError"  class="login-input-field "  style="color: red;"></Label>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
@@ -136,7 +136,7 @@
     </GridLayout>
 
     <GridLayout row="3" col="0" columns="*,*" colSpan="2" class="bottom-content">
-        <Button  row="0" col="0" text="Précédente" (tap)="animateBackward()"
+        <Button  row="0" col="0" text="Etape Précédente" (tap)="animateBackward()"
             class="btn-previous" id="btnPrevious"></Button>
         <Button  row="0" col="1" text="Suivant" (tap)="animateGoForward()" class="btn-next"
             id="btnNext"></Button>
@@ -144,7 +144,7 @@
 
     <GridLayout row="0" col="0" rowSpan="4" colSpan="2" opacity="0" class="overlay"
         id="overlayGridLayout"></GridLayout>
-    <GridLayout row="0" col="0" rowSpan="4" colSpan="2" rows="auto, auto, auto"
+    <GridLayout row="0" col="0" rowSpan="4" colSpan="2" rows="auto, auto, auto" 
         columns="*,*" verticalAlignment="center" visibility="hidden" opacity="0"
         class="select-date" id="selectDateGridLayout">
         <Label row="0" col="0" colSpan="2" text="Select Date" class="title-select-date"></Label>
