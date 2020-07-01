@@ -255,30 +255,30 @@ getPicture(){
     if(this.user.LOGIN=="")
    {
        this.isrequired=true;
-       this.MessageError="Required Textfield *";
+       this.MessageError="Champ Obligatoire *";
    }
    else if (!this.user.isValidEmail())
    {
     this.isrequired=true;
-    this.MessageError="Enter a valid email address";
+    this.MessageError="Entrez une adresse email valide";
    }
    else if (password.text=="")
    {
     this.isrequired=false;
        this.isrequiredPassword=true;
-       this.MessageErrorPassword="Required Textfield *";
+       this.MessageErrorPassword="Champ Obligatoire *";
    }
    else if(this.user.PASSWORD!=password.text)
    {
     this.isrequired=false;
     this.isrequiredPassword=true;
-    this.MessageErrorPassword="Password does not match";
+    this.MessageErrorPassword="Les Mots de passe no correspondent pas";
    }
    else if(!this.user.isValidPassword())
    {
     this.isrequired=false;
     this.isrequiredPassword=true;
-    this.MessageErrorPassword="Password Minimum length 6 , Must have uppercase lowercase letters  digits";
+    this.MessageErrorPassword="Le mot de passe doit avoir au minimum 6 caractéres avec une lettre en majuscule et des chiffres";
    }
    else{
     this.isrequired=false;
@@ -315,23 +315,23 @@ getPicture(){
             if(this.candidat.NOM=="" || this.candidat.NOM==undefined )
             {
                 this.RequiredLabel=1;
-                this.MessageError="Required Textfield *";
+                this.MessageError="Champ Obligatoire *";
             }
             else if (this.candidat.NOM.length<4)
             {
                 this.RequiredLabel=1;
-             this.MessageError="Min length  4 "; 
+             this.MessageError="4 Caractéres au minimum "; 
             }
 
             else if (this.candidat.PRENOM=="" || this.candidat.PRENOM==undefined)
             {
                 this.RequiredLabel=2;
-                this.MessageError="Required Textfield *";
+                this.MessageError="Champ Obligatoire *";
             }
             else if (this.candidat.PRENOM.length<4)
             {
                 this.RequiredLabel=2;
-             this.MessageError="Min length  4 ";
+             this.MessageError="4 caractéres au minimum ";
             }
             /****************END********************/
 
@@ -339,7 +339,7 @@ getPicture(){
             else if (this.candidat.DATE_NAISSENCE.toString()=="" || this.candidat.DATE_NAISSENCE==undefined)
             {
                 this.RequiredLabel=3;
-             this.MessageError="Required Textfield * ";
+             this.MessageError="Champ Obligatoire * ";
             }
             /*****************************END************** */
 
@@ -347,7 +347,7 @@ getPicture(){
             else if (this.candidat.CIN=="" || this.candidat.CIN==undefined)
             {
                 this.RequiredLabel=4;
-             this.MessageError="Required Textfield * ";
+             this.MessageError="Champ Obligatoire* ";
             }
            
             else if (this.candidat.CIN.length!=8)
@@ -360,7 +360,7 @@ getPicture(){
             else if (this.candidat.TELEPHONE=="" || this.candidat.TELEPHONE==undefined)
             {
                 this.RequiredLabel=5;
-             this.MessageError="Required Textfield * ";
+             this.MessageError="Champ Obligatoire * ";
             }
            
             else if (this.candidat.TELEPHONE.length!=8)
