@@ -29,7 +29,7 @@ export class ListeOffresComponent implements OnInit {
     
   constructor(private backend:BackendServiceService, private routerExtensions: RouterExtensions) {
   }
-
+ 
   ngOnInit(): void { 
       this.data.push({ heading: "Chef D'agence de Voyage", content: "Le chef d'agence de voyages a une triple fonction à savoir managériale, de gestion et marketing. En effet, la planification,...", soc: "GO-Makkah Tunisie", loca: " Les Berges du Lac, Tunis, Tunisie"  });
       this.data.push({ heading: "Chef De Bar", content: "- Aisance relationnelle, excellente présentation. - Créativité. - Leadership. - Discrétion et pratique des plusieurs...", soc: "Cap Bon Kelibia Beach Hôtel & Spa", loca: "Kélibia, Kelibia, Tunisie" });
