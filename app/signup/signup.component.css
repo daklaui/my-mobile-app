@@ -136,3 +136,7 @@ ListView {
     margin-top: 5;
     margin-bottom: 5;
 }
+
+TextField {
+    color : white;
+}

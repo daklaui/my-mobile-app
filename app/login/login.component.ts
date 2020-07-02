@@ -28,7 +28,7 @@ constructor(private backend:BackendServiceService, private routerExtensions: Rou
 	submit() {
 		if (!this.user.isValidEmail()) {
        this.isrequired=true;
-       this.MessageError="Enter a valid email address";
+       this.MessageError="Entrez une adresse email valide";
 			return;
 		}
 		else{
@@ -44,6 +44,12 @@ constructor(private backend:BackendServiceService, private routerExtensions: Rou
             console.log("mosataz"+e);
           });
     }
-	}
+  }
+  
+
+  gotoSignUp()
+  {
+    this.routerExtensions.navigate(["/SignUp"]);
+  }
 }
 

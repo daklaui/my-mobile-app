@@ -108,26 +108,28 @@
                 <ScrollView width="100%" height="100%">
                 <GridLayout rows="auto, auto, auto,auto">
                     <StackLayout row="0" class="input-field">
-                        <Label style="padding: 10px; size: 15px; margin: 15px;" text="{{linkFile}}"> </Label>
-                        <Button class="btn btn-outline" text="Upload File" (tap)="openCustomFilesPicker()"></Button>
-                        <StackLayout class="hr-light"></StackLayout>
-                    </StackLayout>
-    
-                    <StackLayout row="1" class="input-field">
-                        <Image *ngIf = "myImage" class="ImageCss" src="{{myImage}}" ></Image>
-                        <StackLayout class="hr-light"></StackLayout>
-                    </StackLayout>
-                    <StackLayout row="2" class="input-field">
-                   <Button class="btn btn-outline" text="Upload Image" (tap)="getPicture()"></Button>
-                        <!-- <TextField  class="input"
-                            hint="Photo" ></TextField>-->
-                        <StackLayout class="hr-light"></StackLayout>
-                    </StackLayout> 
-                    <StackLayout row="3" class="input-field">
                         <TextField  class="input" [(ngModel)]="candidat.ADRESSE"
                             hint="Adresse" id="Adresse"></TextField>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
+
+                    <StackLayout row="1" class="input-field">
+                        <Label style="padding: 10px; size: 15px; margin: 15px;" > </Label>
+                        <Button class="btn btn-outline" text="Télécharger votre CV" (tap)="openCustomFilesPicker()"></Button>
+                        <StackLayout class="hr-light"></StackLayout>
+                    </StackLayout>
+    
+                    <StackLayout row="2" class="input-field">
+                        <Image *ngIf = "myImage" class="ImageCss" src="{{myImage}}" ></Image>
+                        <StackLayout class="hr-light"></StackLayout>
+                    </StackLayout>
+                    <StackLayout row="3" class="input-field">
+                   <Button class="btn btn-outline" text="Télécharger votre image" (tap)="getPicture()"></Button>
+                        <!-- <TextField  class="input"
+                            hint="Photo" ></TextField>-->
+                        <StackLayout class="hr-light"></StackLayout>
+                    </StackLayout> 
+                    
                 </GridLayout>
             </ScrollView>
             </PreviousNextView>

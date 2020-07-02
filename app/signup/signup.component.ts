@@ -310,7 +310,6 @@ getPicture(){
             let SelectDate = <TextField>this.page.getViewById('SelectDate');
             let Cin = <TextField>this.page.getViewById('Cin');
             let Telephone = <TextField>this.page.getViewById('Telephone');
-            alert(this.candidat.DATE_NAISSENCE+"");
            /*Verificaton Nom et prenom candidat */
             if(this.candidat.NOM=="" || this.candidat.NOM==undefined )
             {
