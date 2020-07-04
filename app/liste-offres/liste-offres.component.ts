@@ -21,7 +21,7 @@ export class ListeOffresComponent implements OnInit {
   }
 
   onButtonTap(id:Number): void {
-    this.routerExtensions.navigate(["/Detaille",id], { clearHistory: true });
+    this.routerExtensions.navigate(["/Detaille",id], { clearHistory: false });
       console.log("Button was pressed" + id);
   }
 
@@ -29,7 +29,7 @@ export class ListeOffresComponent implements OnInit {
     
   constructor(private backend:BackendServiceService, private routerExtensions: RouterExtensions) {
   }
-
+text_date:String="Date Expiration : ";
   ngOnInit(): void { 
       this.data.push({ heading: "Chef D'agence de Voyage", content: "Le chef d'agence de voyages a une triple fonction à savoir managériale, de gestion et marketing. En effet, la planification,...", soc: "GO-Makkah Tunisie", loca: " Les Berges du Lac, Tunis, Tunisie"  });
       this.data.push({ heading: "Chef De Bar", content: "- Aisance relationnelle, excellente présentation. - Créativité. - Leadership. - Discrétion et pratique des plusieurs...", soc: "Cap Bon Kelibia Beach Hôtel & Spa", loca: "Kélibia, Kelibia, Tunisie" });
@@ -39,7 +39,7 @@ export class ListeOffresComponent implements OnInit {
       this.data.push({ heading: "Gouvernante - Chef de Cuisine", content: "Un hotel 5 étoiles sis à la zone touristique du monastir cherche à recruter:  * Une gouvernante...", soc: "Hotel Sahel", loca: "Skanes Monastir, Monastir, Tunisie" });
       this.backend.GetListeDesOfres().then((data)=>{
         this.backend.ListeOfOffres=data.content.toJSON();
-        console.log(this.backend.ListeOfOffres[0]); 
+     //   console.log(this.backend.ListeOfOffres[0]); 
       });
    
   }

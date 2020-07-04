@@ -2,7 +2,8 @@ import { ViewChild } from "@angular/core";
 import { RadSideDrawerComponent, SideDrawerType } from "nativescript-ui-sidedrawer/angular";
 import { Component, OnInit } from '@angular/core';
 import * as utils from "tns-core-modules/utils/utils";
-
+import { BackendServiceService } from "../backend-service.service";
+const appSettings = require("tns-core-modules/application-settings");
 export const ICON_EYE: string = String.fromCharCode(0xf06e);
 
 class Photo {
@@ -22,8 +23,8 @@ class Photo {
 export class ProfileComponent implements OnInit {
 	public photos: Array<Photo> = [];
 	public iconEye: string = ICON_EYE;
-
-	constructor() {
+public candidat:any;
+	constructor(private backend:BackendServiceService) {
 		this.photos = [
 			new Photo("~/images/cyrine.jpg", "Here in Pucalá, Chiclayo Perú", "Hi my friends..."),
 			new Photo("~/images/malek.jpg", "Here in Chiclayo", 'Hi ....'),
@@ -32,6 +33,9 @@ export class ProfileComponent implements OnInit {
 	}
 
 	ngOnInit() {
+this.backend.GetCandidat(appSettings.getNumber("id_user")).then(data=>{
+this.candidat=data.content.toJSON();
+})
 	}
 
 	onItemTap(args) {

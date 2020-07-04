@@ -1,37 +1,39 @@
 
     <StackLayout >
         <SearchBar hint="Mots clé ou adresse " [text]="searchPhrase"
-        (submit)="onSearchSubmit($event)"></SearchBar>
-
-
-  
-  
+        (submit)="onSearchSubmit($event)" style="margin-bottom: 30px;"></SearchBar>
     <ScrollView  class="page">
-        
-        <StackLayout >
-         
-            <CardView *ngFor="let item of this.backend.ListeOfOffres" class="card" elevation="40"
-                radius="10" ios:shadowRadius="3">
-                <StackLayout class="card-layout">
-                    <Label class="h3" [text]="item.TITRE" color="#2bade7">
-                    </Label>
-                    <Label text="♣️" color="#eb800e">
-                    </Label>
 
-                    <Label class="h4" [text]="item.NOM_EMP">
-                    </Label>
-                    <Label text="❤️" color="#eb800e">
-                    </Label>
-                    <Label class=" h4" [text]="item.ADRESSE_EMPLOYEUR"></Label>
+        <StackLayout  >
+    
 
-                    <Label class="body" textWrap="true" [text]="item.OFFRE_DESC">
-                    </Label>
-                    <Button text="Voir plus" color="#eb800e"
-                        (tap)="onButtonTap(item.ID_OFFRE)" backgroundColor="#fff">
-                    </Button>
+
+            <StackLayout *ngFor="let item of this.backend.ListeOfOffres"  orientation="vertical" class="owe-list-item"  width="100%" (tap)="onButtonTap(item.ID_OFFRE)">
+            <GridLayout columns="auto, *, auto" rows="auto" width="100%" height="auto" class="owe-main-info">
+                <Image row="0" col="0" src="~/Images/travel-category.png"
+                    class="owe-category-icon"
+                    verticalAlignment="top"></Image>
+                <StackLayout row="0" col="1" orientation="vertical"
+                    class="owe-info-container">
+                    <Label class="owe-title" [text]="item.TITRE"></Label>
+                    
                 </StackLayout>
+                <Label verticalAlignment="top" row="0" col="2"
+                [text]="item.NOM_EMP" class="pay-amount"></Label>
+            </GridLayout>
+            <GridLayout columns="auto, *, auto" rows="auto"
+                width="100%" height="auto" class="owe-secondary-info">
+                <Label row="0" col="0" [text]="text_date+ (item.DATE_EXPIRATION  | date: 'dd/MM/yyyy')" class="time-information"></Label>
+                
+            </GridLayout>
+            <Label class="divider" text=""></Label>
+        </StackLayout>
 
-            </CardView>
+ 
+
+
+
+
         </StackLayout>
     </ScrollView>
-</StackLayout>
+</StackLayout> 

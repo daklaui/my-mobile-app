@@ -5,7 +5,7 @@ import { RouterExtensions } from 'nativescript-angular/router';
 import { User } from '../Model/user.model';
 import { BackendServiceService } from '../backend-service.service';
 
-
+const appSettings = require("tns-core-modules/application-settings");
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -38,6 +38,7 @@ constructor(private backend:BackendServiceService, private routerExtensions: Rou
         this.userResult =response.content.toJSON();
               if(this.userResult.ID_USER>0 || this.userResult.ID_USER!=undefined)
               {
+                appSettings.setNumber("id_user",this.userResult.ID_USER);
                 this.routerExtensions.navigate(["/home"], { clearHistory: true });
               }
           }, (e) => {

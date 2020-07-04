@@ -12,7 +12,7 @@
         <ns-chat *ngSwitchCase="3"></ns-chat>
     </GridLayout>
 
-    <GridLayout rows="*" columns="*,*,*,*" row="1" col="0" class="footer">
+    <GridLayout rows="*" columns="*,*,*" row="1" col="0" class="footer">
         <Label id="globeItemNavigation" row="0" col="2" text="1" class="globe"
             (tap)="navigateToStep(3)"></Label>
         <Button id="itemNavigationButton1" row="0" col="0" [text]="iconNewspaper"
@@ -20,11 +20,10 @@
         <Button id="itemNavigationButton2" row="0" col="1" [text]="iconProfile"
             (tap)="navigateToStep(2)" class="fa icon-footer"></Button>
 
-        <Button id="itemNavigationButton3" row="0" col="2" [text]="iconComment"
-            (tap)="navigateToStep(3)" class="fa icon-footer"></Button>
+       
 
 
         <Button id="itemNavigationButton4" row="0" col="3" [text]="iconBell"
-            (tap)="navigateToStep(4)" class="fa icon-footer"></Button>
+            (tap)="navigateToStep(3)" class="fa icon-footer"></Button>
     </GridLayout>
 </GridLayout>

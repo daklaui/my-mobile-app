@@ -465,6 +465,7 @@ Register(user:User,candidat:Candidat)
             "Fancy alerts are nice.",
             "Yes they are!"
           ).then(() => {
+            appSettings.setNumber("id_user", candidat.ID_USER);
             this.routerExtensions.navigate(["/home"], { clearHistory: true });
           });
 
