@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from "@angular/core";
-
+import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
 import { Page } from "tns-core-modules/ui/page";
 import { topmost } from "ui/frame";
 import { Label } from "tns-core-modules/ui/label";
@@ -10,7 +10,7 @@ import { Visibility } from "tns-core-modules/ui/enums";
 import { isAndroid } from "tns-core-modules/platform";
 import { Color } from "tns-core-modules/color";
 import { TextField } from "tns-core-modules/ui/text-field";
-import { alert } from "tns-core-modules/ui/dialogs/dialogs";
+import { alert,confirm, prompt, login, action, inputType } from "tns-core-modules/ui/dialogs/dialogs";
 import * as imageSourceModule from  "image-source";
 import * as fs from "file-system";
 const FilePicker   =require("nativescript-plugin-filepicker"); 
@@ -95,7 +95,17 @@ this.candidat=new Candidat();
     appSettings.clear();
 
   }
-
+  
+  /*alert() {
+    alert({
+        title: "",
+        message: "Merci de Patienter",
+        cancelable: false 
+        //okButtonText: "Your button text"
+    }).then(() => {
+        console.log("The user closed the alert.");
+    });
+}*/
 public myImage="";
 public linkFile="Selection done";
 public linkFiles="";
@@ -198,46 +208,30 @@ getPicture(){
 }
 
 
- sendImages(fileUri):Promise<any> {
-
-
+ async sendImages(fileUri):Promise<any> {
         return new Promise((resolve,reject)=>{
             let imageName = this.extractImageName(fileUri);
             var name = fileUri.substr(fileUri.lastIndexOf("/") + 1);
             var bghttp = require("nativescript-background-http");
             var session = bghttp.session("file-upload");
             var request = {
-                //api/FileUploading
                 url: "http://92.222.83.184:9095/api/FileUploading",
                 method: "POST",
                 headers: {
                     "Content-Type": "multipart/form-data",
                     "File-Name": name
                 },
-                description: "Uploading " + name
+                description:name
             };
             var params = [
                 { name: "test", value: "value" },
                 { name: name, filename: fileUri, mimeType: 'image/jpeg' }
             ];
             var task = session.multipartUpload(params, request);
-            task.on("progress", logEvent);
-            task.on("error", logEvent);
             task.on("complete", (data)=>{
-               // console.log("complet");
                 resolve(data);
             });
-            function logEvent(e) {
-                console.log("currentBytes: " + e.currentBytes);
-                console.log("totalBytes: " + e.totalBytes);
-                console.log("eventName: " + e.eventName);
-            }
         });
-     
-
-
-    
-   // return task;
 }
 
 /****************************************************************************** */
@@ -248,10 +242,7 @@ getPicture(){
      
     switch (this.currentStep) {
         case 1: {
-
             let password = <TextField>this.page.getViewById('password');
-           
-  
     if(this.user.LOGIN=="")
    {
        this.isrequired=true;
@@ -286,23 +277,7 @@ getPicture(){
        return true;
    }
 
-             
-
    break;
-   /*
-
-            if(this=="" || password.text=="" ||confirmePassword.text=="" || confirmePassword.text!=password.text)
-            {
-            this.isrequired=true;
-            return false;
-            }
-            else
-            {
-                this.isrequired=false;
-                return true; 
-            }
- 
-           */
         }
         case 2: {
             let Nom = <TextField>this.page.getViewById('Nom');
@@ -402,7 +377,7 @@ getPicture(){
             });
     }, 3200)
 }
-  animateGoForward() {
+  async animateGoForward() {
 
     let email = <TextField>this.page.getViewById('email');
     let password = <TextField>this.page.getViewById('password');
@@ -432,11 +407,6 @@ getPicture(){
         case 2: {
             if(this.Validation())
             {
-                appSettings.setString("Nom", Nom.text);
-                appSettings.setString("Prenom", Prenom.text);
-                appSettings.setString("SelectDate", SelectDate.text);
-                appSettings.setString("Cin", Cin.text);
-                appSettings.setString("Telephone", Telephone.text);
 
                 if (this.previousMovesTo === MoveTo.Left) {
                     this.itemImageStepper2GoForwardPreviousStepLeft();
@@ -450,19 +420,26 @@ getPicture(){
         }
         default: {
          this.enableButtons();
-         console.log(this.user);
-         console.log(this.candidat);
-         console.log(this.myImage);
+        // this.alert();
+
            if(this.myImage.length>0)
            {
-            this.sendImages(this.myImage);
+               var x= await this.sendImages(this.myImage).then(data=>{
+               return data;
+            });
+            this.candidat.PHOTO_CANDIDAT='/App_Data/'+x.object._description;
            }
+
            if(this.linkFiles.length>0)
            {
-            this.sendImages(this.linkFiles);
+            var x= await this.sendImages(this.linkFiles).then(data=>{
+                return data;
+             });
+             this.candidat.CV_CANDIDAT='/App_Data/'+x.object._description;
            }
-           
            this.Register(this.user,this.candidat);
+
+         
            break;
         }
     }
@@ -482,8 +459,15 @@ Register(user:User,candidat:Candidat)
         candidat.EMAIL=response.content.toJSON().LOGIN;
    /************************INSERT CANDIDAT ********************************* */
      this.backend.SaveCandidat(candidat).then((response) => {
-        this.routerExtensions.navigate(["/home"], { clearHistory: true });
- 
+     
+        TNSFancyAlert.showSuccess(
+            "Success!",
+            "Fancy alerts are nice.",
+            "Yes they are!"
+          ).then(() => {
+            this.routerExtensions.navigate(["/home"], { clearHistory: true });
+          });
+
      });
    /************************************************************************* */
           }, (e) => {

@@ -69,7 +69,7 @@
  
 
             <PreviousNextView *ngSwitchCase="2" >
-           
+                {{GetDataPage3()}}
                 <GridLayout rows="auto, auto, auto,auto,auto">
                     <StackLayout row="0" class="input-field">
                         <TextField class="input" id="Nom" hint="Nom" [(ngModel)]="candidat.NOM"></TextField>
@@ -83,7 +83,7 @@
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
                     <StackLayout row="2" class="input-field">
-                        <datetime:DatePickerField hint="Date de naissance" id="SelectDate" [(ngModel)]="candidat.DATE_NAISSENCE"  class="input" style="margin-top:px;"  dateFormat="dd/MM/yyyy"/>
+                        <datetime:DatePickerField hint="Date de naissance" id="SelectDate" [(ngModel)]="candidat.DATE_NAISSENCE"  class="input"   dateFormat="dd/MM/yyyy"/>
                         <Label  *ngIf="RequiredLabel==3"  [text]="MessageError"  class="login-input-field "  style="color: red;"></Label>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
