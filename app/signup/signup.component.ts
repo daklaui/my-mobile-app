@@ -263,7 +263,7 @@ getPicture(){
    {
     this.isrequired=false;
     this.isrequiredPassword=true;
-    this.MessageErrorPassword="Les Mots de passe no correspondent pas";
+    this.MessageErrorPassword="Les Mots de passe ne correspondent pas";
    }
    else if(!this.user.isValidPassword())
    {
@@ -321,13 +321,13 @@ getPicture(){
             else if (this.candidat.CIN=="" || this.candidat.CIN==undefined)
             {
                 this.RequiredLabel=4;
-             this.MessageError="Champ Obligatoire* ";
+             this.MessageError="Champ Obligatoire * ";
             }
            
             else if (this.candidat.CIN.length!=8)
             {
                 this.RequiredLabel=4;
-             this.MessageError="Cin failed* ";
+             this.MessageError="Vérifier le CIN  * ";
             }
             /*****************************END************** */
             /**********************Verification CIN***********************/
@@ -340,7 +340,7 @@ getPicture(){
             else if (this.candidat.TELEPHONE.length!=8)
             {
                 this.RequiredLabel=5;
-             this.MessageError="Telephone failed * ";
+             this.MessageError="Vérifier le numéro de téléphone * ";
             }
                 /*****************************END************** */
             else{
@@ -461,9 +461,8 @@ Register(user:User,candidat:Candidat)
      this.backend.SaveCandidat(candidat).then((response) => {
      
         TNSFancyAlert.showSuccess(
-            "Success!",
-            "Fancy alerts are nice.",
-            "Yes they are!"
+            "Compte a été crée !",
+            
           ).then(() => {
             appSettings.setNumber("id_user", candidat.ID_USER);
             this.routerExtensions.navigate(["/home"], { clearHistory: true });
