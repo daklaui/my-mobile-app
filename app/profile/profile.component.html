@@ -1,7 +1,7 @@
 <GridLayout class="animate-fadeInUp-delay-0ms">
     <ScrollView orientation="vertical">
         <GridLayout rows="auto, auto, auto, auto,auto" columns="*">
-            <Image row="0" col="0" [src]=""
+            <Image row="0" col="0" src="~/Images/user.png"
                 stretch="aspectFill" class="profilePic"></Image>
             <Label row="1" col="0" [text]="this.candidat.NOM  +'  '+this.candidat.PRENOM "
                 class="title-profile" textAlignment="center"></Label>
@@ -12,9 +12,6 @@
   
                     <Label row="1" col="0" text="Date de naissence : " class="line3" style="font-weight: bold; font-size: 14;"></Label>
                     <Label row="1" col="1" [text]="this.candidat.DATE_NAISSENCE" class="line3"></Label>
-
-                    <Label row="2" col="0" text="CIN : " class="line3" style="font-weight: bold; font-size: 14;"></Label>
-                    <Label row="2" col="1" [text]="this.candidat.CIN" class="line3"></Label>
 
                     <Label row="3" col="0" text="Numéro de téléphone : " class="line3" style="font-weight: bold; font-size: 14;"></Label>
                     <Label row="3" col="1" [text]="this.candidat.TELEPHONE" class="line3"></Label>
