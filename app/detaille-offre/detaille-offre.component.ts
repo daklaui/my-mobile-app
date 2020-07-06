@@ -34,9 +34,8 @@ export class DetailleOffreComponent implements OnInit {
     }
     this.backend.Postuler(post).then(data=>{
       TNSFancyAlert.showSuccess(
-        "Success!",
-        "Fancy alerts are nice.",
-        "Yes they are!"
+        "Postulé avec succès!",
+     
       ).then(() => {
       //  this.routerExtensions.navigate(["/home"], { clearHistory: true });
       });
