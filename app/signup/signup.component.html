@@ -2,9 +2,9 @@
 
 <Page
    xmlns="http://schemas.nativescript.org/tns.xsd"
-   xmlns:datetime="nativescript-datetimepicker">
-
-
+   xmlns:datetime="nativescript-datetimepicker"   xmlns:CheckBox="@nstudio/nativescript-checkbox" xmlns:dd="nativescript-drop-down">
+ 
+  
 <GridLayout class="home" rows="16,124,*,48" columns="*,*">
     <!-- Add your page content here -->
 
@@ -70,7 +70,7 @@
 
             <PreviousNextView *ngSwitchCase="2" >
                 {{GetDataPage3()}}
-                <GridLayout rows="auto, auto, auto,auto,auto">
+                <GridLayout rows="auto, auto, auto,auto,auto,auto">
                     <StackLayout row="0" class="input-field">
                         <TextField class="input" id="Nom" hint="Nom" [(ngModel)]="candidat.NOM"></TextField>
                         <Label  *ngIf="RequiredLabel==1"  [text]="MessageError" class="login-input-field "  style="color: red;"></Label>
@@ -88,9 +88,14 @@
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
                     <StackLayout row="3" class="input-field">
-                        <TextField  class="input" id="Cin" [(ngModel)]="candidat.CIN" style="margin-top:5px;"
-                            hint="Cin" ></TextField>
-                            <Label  *ngIf="RequiredLabel==4"  [text]="MessageError" class="login-input-field "  style="color: red;"></Label>
+                        <GridLayout columns="auto, auto" rows="auto" 
+                       >
+                       <CheckBox:CheckBox text="Homme" style="color :white;font-size: medium; margin: 22px;" row="0" col="0" checked="false" />
+                       <CheckBox:CheckBox text="Femme" #check1  style="color :white;font-size: medium; margin: 22px;"  class="input" row="0" col="1" checked="false" />
+                       
+                    </GridLayout>
+                      
+                           
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
                     <StackLayout row="4" class="input-field">
@@ -99,7 +104,21 @@
                             <Label *ngIf="RequiredLabel==5"  [text]="MessageError"  class="login-input-field "  style="color: red;"></Label>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
-             
+                    <StackLayout row="5" class="input-field">
+               
+                
+                <DropDown #dd style="margin: 22px;color: black;font-size: medium;background-color: white; padding: 20px;"
+                          itemsTextAlignment="center"
+                          [items]="items"
+                          (selectedIndexChanged)="onchange($event)"
+                          (opened)="onopen()"
+                          (closed)="onclose()"
+                          row="0"
+                          colSpan="2"></DropDown>
+      
+         
+                        <StackLayout class="hr-light"></StackLayout>
+                    </StackLayout>
                 </GridLayout>
             </PreviousNextView>
 

@@ -43,4 +43,25 @@ text_date:String="Date Expiration : ";
       });
    
   }
+
+  onTextChanged(args)
+  {
+   
+    const searchBar = args.object as SearchBar;
+    if(searchBar.text!="")
+    {
+      this.backend.GetListeDesOfrespartext(searchBar.text).then((data)=>{
+        this.backend.ListeOfOffres=data.content.toJSON();
+     //   console.log(this.backend.ListeOfOffres[0]); 
+      });
+    }
+    else
+    {
+      this.backend.GetListeDesOfres().then((data)=>{
+        this.backend.ListeOfOffres=data.content.toJSON();
+     //   console.log(this.backend.ListeOfOffres[0]); 
+      });
+    }
+    
+  }
 }

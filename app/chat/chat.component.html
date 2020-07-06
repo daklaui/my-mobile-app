@@ -1,16 +1,28 @@
-<GridLayout class="animate-fadeInUp-delay-0ms">
-    <StackLayout *ngFor="let item of this.listpost"  orientation="vertical" class="owe-list-item"  width="100%" (tap)="onButtonTap(item.ID_OFFRE_POSTULER)">
+<ScrollView  class="page">
+
+    <StackLayout  >
+    <StackLayout *ngFor="let item of this.listpost"   orientation="vertical" class="owe-list-item"  width="100%" (tap)="onButtonTap(item.ID_OFFRE_POSTULER)">
         <GridLayout columns="auto, *, auto" rows="auto" width="100%" height="auto" class="owe-main-info">
-            <Image row="0" col="0" src="~/Images/travel-category.png"
+            <Image row="0" col="0" *ngIf="item.ACTION==false" src="~/Images/fail.png"
+                class="owe-category-icon"
+                verticalAlignment="top"></Image>
+                <Image row="0" col="0" *ngIf="item.ACTION" src="~/Images/ok.png"
+                class="owe-category-icon"
+                verticalAlignment="top"></Image>
+                <Image row="0" col="0" *ngIf="item.ACTION==null" src="~/Images/travel-category.png"
                 class="owe-category-icon"
                 verticalAlignment="top"></Image>
             <StackLayout row="0" col="1" orientation="vertical"
                 class="owe-info-container">
                 <Label class="owe-title" [text]="item.TITRE"></Label>
-                
+                 
             </StackLayout>
             <Label verticalAlignment="top" row="0" col="2"
-            [text]="item.NOM" class="pay-amount"></Label>
+            text="Réfuser" *ngIf="item.ACTION==false" style="color: red; font-style: oblique;" class="pay-amount"></Label>
+            <Label verticalAlignment="top" row="0" col="2"
+            text="Accepter merci de verifer votre mail" *ngIf="item.ACTION" style="color: green; font-style: oblique;" class="pay-amount"></Label>
+            <Label verticalAlignment="top" row="0" col="2"
+            text="En attente" *ngIf="item.ACTION==null" class="pay-amount"></Label>
         </GridLayout>
         <GridLayout columns="auto, *, auto" rows="auto"
             width="100%" height="auto" class="owe-secondary-info">
@@ -19,4 +31,5 @@
         </GridLayout>
         <Label class="divider" text=""></Label>
     </StackLayout>
-</GridLayout>
+</StackLayout> 
+</ScrollView>

@@ -21,6 +21,6 @@ export class Candidat {
   ADRESSE: String;
 
    ID_USER: Number;
-
+   SPECIALITE:String;
 
 }

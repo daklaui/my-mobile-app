@@ -39,7 +39,7 @@ export class ChatComponent implements OnInit {
 	ngOnInit() {
 		this.backend.GetListePostulation(appSettings.getNumber("id_user")).then((data)=>{
 			this.listpost=data.content.toJSON();
-		 //   console.log(this.backend.ListeOfOffres[0]); 
+		 console.log(this.listpost); 
 		  });
 	}
 

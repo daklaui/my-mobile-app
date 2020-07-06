@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
 
     navigateToStep(step: number): void {
         this.currentStep = step;
-        for (let i = 1; i <= 4; i++) {
+        for (let i = 1; i <= 3; i++) {
             let otherButton = <Button>this._page.getViewById('itemNavigationButton' + i);
             otherButton.className = BUTTON_DISABLED;
 

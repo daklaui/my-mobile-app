@@ -34,10 +34,19 @@ Login(user:User):Promise<any>
 //console.log(this.usesr);
 }
 
+
 GetListeDesOfres():Promise<any>
 {
   return   request({
     url: BACKEND_LINK+"/api/Offre",
+    method: "GET",
+    headers: { "Content-Type": "application/json" }
+});
+} 
+GetListeDesOfrespartext(s:string):Promise<any>
+{
+  return   request({
+    url: BACKEND_LINK+"/api/GetListeDesOffresSpecialite_Result?id="+s,
     method: "GET",
     headers: { "Content-Type": "application/json" }
 });
@@ -79,6 +88,17 @@ async GetCandidat(id:Number):Promise<any>
 {
   return   request({
     url: BACKEND_LINK+"/api/Candidat/"+id,
+    method: "GET",
+    headers: { "Content-Type": "application/json" }
+});
+} 
+
+
+
+ async GetListeSpec():Promise<any>
+{
+  return   request({
+    url: BACKEND_LINK+"/api/GetListeDesSpec",
     method: "GET",
     headers: { "Content-Type": "application/json" }
 });

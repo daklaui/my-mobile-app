@@ -12,7 +12,8 @@ import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 
 // Uncomment and add to NgModule imports  if you need to use the HTTP wrapper
 import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
-
+import { TNSCheckBoxModule } from '@nstudio/nativescript-checkbox/angular';
+import { DropDownModule } from "nativescript-drop-down/angular";
 
 @NgModule({
   declarations: [
@@ -28,8 +29,9 @@ import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
       NativeScriptDateTimePickerModule,
       NativeScriptFormsModule,
       NativeScriptHttpClientModule,
-      NativeScriptUISideDrawerModule
-     
+      NativeScriptUISideDrawerModule,
+      TNSCheckBoxModule,
+      DropDownModule
   ],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA],

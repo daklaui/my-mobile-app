@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
 import { Page } from "tns-core-modules/ui/page";
-import { topmost } from "ui/frame";
+import { topmost, Frame } from "tns-core-modules/ui/frame";
 import { Label } from "tns-core-modules/ui/label";
 import { Button } from "tns-core-modules/ui/button";
 import { View } from "tns-core-modules/ui/core/view";
@@ -15,13 +15,16 @@ import * as imageSourceModule from  "image-source";
 import * as fs from "file-system";
 const FilePicker   =require("nativescript-plugin-filepicker"); 
 const imagepicker = require("nativescript-imagepicker");
-
+import { CheckBox } from '@nstudio/nativescript-checkbox';
 import * as app from 'tns-core-modules/application';
 import { NativeScriptDateTimePickerModule } from "nativescript-datetimepicker/angular";
 import { User } from "../Model/user.model";
 import { Candidat } from "../Model/candidat.model";
 import { BackendServiceService } from "../backend-service.service";
 import { RouterExtensions } from "nativescript-angular/router";
+import { SelectedIndexChangedEventData } from "tns-core-modules/ui/tab-view";
+import { DropDownModule } from "nativescript-drop-down/angular";
+import { ValueList, DropDown } from "nativescript-drop-down";
 
 const permissions = require('nativescript-permissions');
 const DEFAULT_STEP = 'item-stepper';
@@ -42,6 +45,7 @@ const appSettings = require("tns-core-modules/application-settings");
 })
 
 export class SignupComponent implements OnInit {
+
   isrequired=false;
   public RequiredLabel=0;
   isrequiredPassword=false;
@@ -72,15 +76,22 @@ export class SignupComponent implements OnInit {
   private previousMovesTo: MoveTo;
   private _selectDateGridLayout: GridLayout;
   private _overlayGridLayout: GridLayout;
-
+  public selectedIndex = 1;
+  public items: Array<string>;
+  public ite:any [];
+public Spec="";
   constructor(private page: Page,private backend:BackendServiceService, private routerExtensions: RouterExtensions) {   var returnDate = new Date(); 
     returnDate.setDate(returnDate.getDate() + 2);
     this.returnDate = returnDate;
 this.user=new User();
 this.candidat=new Candidat();
+this.items = [];
+
+
+
 }
-  
-  ngOnInit() {
+
+  async ngOnInit() {
     this.page.actionBarHidden = true;
     this._btnPrevious = this.page.getViewById('btnPrevious');
     this._btnNext = this.page.getViewById('btnNext');
@@ -94,8 +105,24 @@ this.candidat=new Candidat();
     this._overlayGridLayout = this.page.getViewById('overlayGridLayout');
     appSettings.clear();
 
+ this.ite= await this.backend.GetListeSpec().then(data => {
+     // this.ite=data.content.toJSON();
+     return data.content.toJSON();
+  });
+
+
+  this.ite.forEach(element => {
+    this.items.push(element.LIB_SPEC);
+});
   }
-  
+  public onchange(args: SelectedIndexChangedEventData) {
+    console.log(`Drop Down selected index changed from ${args.oldIndex} to ${args.newIndex}`);
+    console.log(this.items[args.newIndex]);
+    this.Spec=this.items[args.newIndex];
+   
+}
+
+
   /*alert() {
     alert({
         title: "",
@@ -318,17 +345,7 @@ getPicture(){
             /*****************************END************** */
 
             /**********************Verification CIN***********************/
-            else if (this.candidat.CIN=="" || this.candidat.CIN==undefined)
-            {
-                this.RequiredLabel=4;
-             this.MessageError="Champ Obligatoire* ";
-            }
            
-            else if (this.candidat.CIN.length!=8)
-            {
-                this.RequiredLabel=4;
-             this.MessageError="Cin failed* ";
-            }
             /*****************************END************** */
             /**********************Verification CIN***********************/
             else if (this.candidat.TELEPHONE=="" || this.candidat.TELEPHONE==undefined)
@@ -407,7 +424,7 @@ getPicture(){
         case 2: {
             if(this.Validation())
             {
-
+             
                 if (this.previousMovesTo === MoveTo.Left) {
                     this.itemImageStepper2GoForwardPreviousStepLeft();
                 } else {
@@ -437,6 +454,8 @@ getPicture(){
              });
              this.candidat.CV_CANDIDAT='/App_Data/'+x.object._description;
            }
+              this.candidat.SPECIALITE=this.Spec;
+
            this.Register(this.user,this.candidat);
 
          

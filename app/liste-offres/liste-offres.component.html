@@ -1,7 +1,7 @@
 
     <StackLayout >
         <SearchBar hint="Mots clé ou adresse " [text]="searchPhrase"
-        (submit)="onSearchSubmit($event)" style="margin-bottom: 30px;"></SearchBar>
+         (textChange)="onTextChanged($event)" style="margin-bottom: 30px;"></SearchBar>
     <ScrollView  class="page">
 
         <StackLayout  >
